@@ -1,21 +1,29 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Supabase } from '../../supabase/supabase'
+import { useNavigate } from 'react-router-dom'
 export function Login() {
   const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const navigate = useNavigate()
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const { data, error } = await Supabase.auth.signInWithOtp({
+      let { data, error } = await Supabase.auth.signInWithPassword({
         email,
-        options: {
-          emailRedirectTo: 'http://127.0.0.1:5173/',
-        },
+        password,
       })
-      console.log(data, error)
     } catch (error) {
       console.log(error)
     }
   }
+
+  useEffect(() => {
+    if (!Supabase.auth.getUser()) {
+      navigate('/')
+    }
+  }, [navigate])
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -24,6 +32,12 @@ export function Login() {
           name='email'
           placeholder='ejemplo@gmail.com'
           onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type='password'
+          name='password'
+          placeholder='********'
+          onChange={(e) => setPassword(e.target.value)}
         />
         <button>Enviar</button>
       </form>
