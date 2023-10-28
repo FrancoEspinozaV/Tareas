@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { useTasks } from '../context/TaskContext'
 export function TaskList() {
   const { tasks, getTasks } = useTasks()
-  console.log(tasks)
   useEffect(() => {
     getTasks()
   }, [])
