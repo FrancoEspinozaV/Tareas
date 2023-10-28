@@ -2,11 +2,10 @@ import { useEffect } from 'react'
 import { Supabase } from '../../supabase/supabase'
 import { useNavigate } from 'react-router-dom'
 import { TaskForm } from '../../component/taskForm'
-import { useTasks } from '../../context/TaskContext'
+import { TaskList } from '../../component/TaskList'
 export function Home() {
   const navigate = useNavigate()
-  const obj = useTasks()
-  console.log(obj)
+
   useEffect(() => {
     if (!Supabase.auth.getUser()) {
       navigate('/login')
@@ -18,6 +17,7 @@ export function Home() {
       <h1>Home</h1>
       <button onClick={() => Supabase.auth.signOut()}>Cerrar Sesion</button>
       <TaskForm />
+      <TaskList />
     </div>
   )
 }

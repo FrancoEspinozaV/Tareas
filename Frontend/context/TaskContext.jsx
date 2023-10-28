@@ -1,4 +1,5 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useState } from 'react'
+import { Supabase } from '../supabase/supabase'
 
 export const TaskContext = createContext()
 
@@ -9,8 +10,27 @@ export const useTasks = () => {
 }
 
 export const TaskContextProvider = ({ children }) => {
-  const obj = {
-    name: 'Hello World',
+  const [tasks, setTasks] = useState([])
+
+  const getTasks = async (done = false) => {
+    const {
+      data: { user },
+    } = await Supabase.auth.getUser()
+    const { data: datas, error } = await Supabase.from('Task')
+      .select()
+      .eq('userID', user.id)
+      .eq('Done', done)
+      .order('id', { ascending: true })
+
+    if (!error) {
+      console.log(error)
+    }
+    setTasks(datas)
   }
-  return <TaskContext.Provider value={obj}>{children}</TaskContext.Provider>
+
+  return (
+    <TaskContext.Provider value={{ tasks, getTasks }}>
+      {children}
+    </TaskContext.Provider>
+  )
 }
