@@ -12,7 +12,7 @@ export function TaskList() {
     return (
       <div>
         {tasks.map((task) => (
-          <TaskCard task={task} />
+          <TaskCard task={task} key={task.id} />
         ))}
       </div>
     )
