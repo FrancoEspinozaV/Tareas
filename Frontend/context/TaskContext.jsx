@@ -55,36 +55,44 @@ export const TaskContextProvider = ({ children }) => {
   }
 
   const deleteTask = async (id) => {
-    const {
-      data: { user },
-    } = await Supabase.auth.getUser()
-    const { error } = await Supabase.from('Task')
-      .delete()
-      .eq('userID', user.id)
-      .eq('id', id)
-      .select()
-    if (error) throw error
+    try {
+      const {
+        data: { user },
+      } = await Supabase.auth.getUser()
+      const { error } = await Supabase.from('Task')
+        .delete()
+        .eq('userID', user.id)
+        .eq('id', id)
+        .select()
+      if (error) throw error
 
-    const newTask = tasks.filter((task) => task.id !== id)
+      const newTask = tasks.filter((task) => task.id !== id)
 
-    setTasks(newTask)
+      setTasks(newTask)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const updateTask = async (id, updateFields) => {
-    const {
-      data: { user },
-    } = await Supabase.auth.getUser()
+    try {
+      const {
+        data: { user },
+      } = await Supabase.auth.getUser()
 
-    const { error } = await Supabase.from('Task')
-      .update(updateFields)
-      .eq('userID', user.id)
-      .eq('id', id)
+      const { error } = await Supabase.from('Task')
+        .update(updateFields)
+        .eq('userID', user.id)
+        .eq('id', id)
 
-    if (error) throw error
+      if (error) throw error
 
-    const newTask = tasks.filter((task) => task.id !== id)
+      const newTask = tasks.filter((task) => task.id !== id)
 
-    setTasks(newTask)
+      setTasks(newTask)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
