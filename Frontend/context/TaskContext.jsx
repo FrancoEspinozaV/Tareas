@@ -25,9 +25,8 @@ export const TaskContextProvider = ({ children }) => {
       .eq('Done', done)
       .order('id', { ascending: true })
 
-    if (!error) {
-      console.log(error)
-    }
+    if (error) throw error
+
     setTasks(datas)
     setLoading(false)
   }
@@ -70,9 +69,35 @@ export const TaskContextProvider = ({ children }) => {
 
     setTasks(newTask)
   }
+
+  const updateTask = async (id, updateFields) => {
+    const {
+      data: { user },
+    } = await Supabase.auth.getUser()
+
+    const { error } = await Supabase.from('Task')
+      .update(updateFields)
+      .eq('userID', user.id)
+      .eq('id', id)
+
+    if (error) throw error
+
+    const newTask = tasks.filter((task) => task.id !== id)
+
+    setTasks(newTask)
+  }
+
   return (
     <TaskContext.Provider
-      value={{ tasks, getTasks, createTask, adding, loading, deleteTask }}
+      value={{
+        tasks,
+        getTasks,
+        createTask,
+        adding,
+        loading,
+        deleteTask,
+        updateTask,
+      }}
     >
       {children}
     </TaskContext.Provider>

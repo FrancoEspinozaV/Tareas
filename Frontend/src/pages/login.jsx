@@ -9,7 +9,7 @@ export function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      let { data, error } = await Supabase.auth.signInWithPassword({
+      await Supabase.auth.signInWithPassword({
         email,
         password,
       })
