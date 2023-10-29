@@ -1,6 +1,10 @@
+import { useTasks } from '../context/TaskContext'
+
 export function TaskCard({ task }) {
+  const { deleteTask } = useTasks()
+
   const handleDelete = () => {
-    alert('eliminado')
+    deleteTask(task.id)
   }
 
   const handleToggleDone = () => {
