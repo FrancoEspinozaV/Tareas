@@ -1,45 +1,60 @@
 import { useEffect, useState } from 'react'
 import { Supabase } from '../../supabase/supabase'
-import { useNavigate } from 'react-router-dom'
+
 export function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const navigate = useNavigate()
+  const [error, setError] = useState(false)
+
+  const Errorlogin = () => {
+    return (
+      <span style={{ display: 'block', color: '#ff4d4d', marginBottom: '5px' }}>
+        Error en las credenciales
+      </span>
+    )
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await Supabase.auth.signInWithPassword({
+      const { error } = await Supabase.auth.signInWithPassword({
         email,
         password,
       })
+      if (error) {
+        setError(true)
+        throw error
+      } else {
+        setError(false)
+      }
     } catch (error) {
       console.log(error)
     }
   }
 
-  useEffect(() => {
-    if (!Supabase.auth.getUser()) {
-      navigate('/')
-    }
-  }, [navigate])
-
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div id='login'>
+      <form id='loginForm' onSubmit={handleSubmit}>
         <input
           type='email'
           name='email'
-          placeholder='ejemplo@gmail.com'
-          onChange={(e) => setEmail(e.target.value)}
+          placeholder='TuCorreo@gmail.com'
+          onChange={(e) => {
+            setEmail(e.target.value)
+            setError(false)
+          }}
         />
         <input
           type='password'
           name='password'
           placeholder='********'
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            setPassword(e.target.value)
+            setError(false)
+          }}
         />
-        <button>Enviar</button>
+        {error ? <Errorlogin /> : undefined}
+        <button className='Button'>Iniciar</button>
       </form>
     </div>
   )

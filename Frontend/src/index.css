@@ -1,9 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Mono&family=Playpen+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 * {
   padding: 0;
   margin: 0;
+  font-family: 'Playpen Sans', cursive;
+  font-family: 'PT Mono', monospace;
 }
 
 html {
   background: #030303;
   color: rgb(226, 226, 226);
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  background: #474747;
+  justify-content: space-between;
+  padding: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+button {
+  padding: 7px;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+section {
+  margin-bottom: 10px;
+}
+
+input {
+  height: 25px;
+  width: 40vh;
+}
+
+section > button {
+  height: 10px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+#Tasks {
+  display: flex;
+  align-items: center;
+  width: 40vw;
+  padding: 15px 10px;
+  flex-direction: column;
+}
+#Tasks > div {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 10px;
+  border: 2px solid white;
+  padding: 5px;
+  border-radius: 10px;
+}
+#Tasks h3,
+p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#botones {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#login {
+  width: 100vw;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40vw;
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 20px 0px;
+}
+#loginForm input {
+  margin-bottom: 15px;
+}
+
+#loginForm input::placeholder {
+  text-align: center;
+  font-weight: bold;
+}
+
+#login button {
+  padding: 0px 40px;
+}
+
+.Button1 {
+  background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+  border-radius: 11px;
+  border: 2px solid #dcdcdc;
+  display: inline-block;
+  cursor: pointer;
+  color: #666666;
+  font-size: 16px;
+  padding: 2px 5px;
+  text-decoration: none;
+}
+.Button1:hover {
+  background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+}
+.Button1:active {
+  position: relative;
+  top: 1px;
+}
+
+.Button2 {
+  background: linear-gradient(to bottom, #d67971 5%, #c45b51 100%);
+  border-radius: 6px;
+  border: 1px solid #d83526;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  padding: 6px 24px;
+  text-decoration: none;
+}
+.Button2:hover {
+  background: linear-gradient(to bottom, #c45b51 5%, #d67971 100%);
+}
+.Button2:active {
+  position: relative;
+  top: 1px;
+}
+
+.Button3 {
+  background: linear-gradient(to bottom, #84ad36 5%, #70a732 100%);
+  border-radius: 6px;
+  border: 1px solid #83c41a;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+}
+.Button3:hover {
+  background: linear-gradient(to bottom, #70a732 5%, #84ad36 100%);
+}
+.Button3:active {
+  position: relative;
+  top: 1px;
 }

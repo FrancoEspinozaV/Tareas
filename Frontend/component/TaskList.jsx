@@ -10,11 +10,11 @@ export function TaskList({ done }) {
     if (loading) return <p>Cargando ...</p>
     else if (tasks.length === 0) return <p>No se han encontrado tareas</p>
     return (
-      <div>
+      <section id='Tasks'>
         {tasks.map((task) => (
           <TaskCard task={task} key={task.id} />
         ))}
-      </div>
+      </section>
     )
   }
 

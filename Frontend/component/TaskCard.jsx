@@ -12,10 +12,16 @@ export function TaskCard({ task }) {
   }
   return (
     <div key={task.id}>
-      <h2>{task.name}</h2>
+      <h3>{task.name}</h3>
       <p>Estado: {task.Done ? 'Completado' : 'No Completado'}</p>
-      <button onClick={() => handleDelete()}>Eliminar</button>
-      <button onClick={() => handleToggleDone()}>Listo</button>
+      <div id='botones'>
+        <button className='Button2' onClick={() => handleDelete()}>
+          Eliminar
+        </button>
+        <button className='Button3' onClick={() => handleToggleDone()}>
+          {!task.Done ? 'Terminar' : 'Pendiente'}
+        </button>
+      </div>
     </div>
   )
 }
